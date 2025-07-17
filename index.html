@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Time Manager Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>⏰ Time Manager Pro</h1>
+      <div class="total-time">Total Planned: <span id="totalTime">0</span> min</div>
+    </header>
+
+    <section class="task-input">
+      <form id="taskForm">
+        <input type="text" id="taskName" placeholder="Task name" required />
+        <input type="number" id="taskTime" placeholder="Time (min)" required />
+        <select id="taskCategory">
+          <option value="Work">Work</option>
+          <option value="Study">Study</option>
+          <option value="Chores">Chores</option>
+          <option value="Other">Other</option>
+        </select>
+        <button type="submit">➕ Add Task</button>
+      </form>
+    </section>
+
+    <section class="task-list">
+      <ul id="taskList"></ul>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

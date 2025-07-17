@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #74ebd5, #ACB6E5);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.total-time {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #222;
+}
+
+.task-input form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.task-input input, .task-input select, .task-input button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.task-input input, .task-input select {
+  flex: 1 1 40%;
+}
+
+.task-input button {
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.task-input button:hover {
+  background: #45a049;
+}
+
+.task-list ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.task-list li {
+  background: rgba(255, 255, 255, 0.25);
+  margin-bottom: 10px;
+  padding: 1rem;
+  border-left: 6px solid #4CAF50;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-meta {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: red;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
