@@ -1,57 +1,81 @@
-const form = document.getElementById('taskForm');
-const taskList = document.getElementById('taskList');
-const totalTimeEl = document.getElementById('totalTime');
+document.addEventListener("DOMContentLoaded", () => {
+  const taskForm = document.getElementById("taskForm");
+  const taskName = document.getElementById("taskName");
+  const taskTime = document.getElementById("taskTime");
+  const taskCategory = document.getElementById("taskCategory");
+  const taskList = document.getElementById("taskList");
+  const totalTimeEl = document.getElementById("totalTime");
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  // Load sounds
+  const addSound = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_a447d19b3c.mp3");
 
-window.onload = () => {
-  tasks.forEach(task => renderTask(task));
-  updateTotalTime();
-};
+  const ambientSound = new Audio("sounds/ambient.mp3");
+  ambientSound.loop = true;
+  ambientSound.volume = 0.2;
 
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
+  let totalTime = 0;
 
-  const name = document.getElementById('taskName').value.trim();
-  const time = parseInt(document.getElementById('taskTime').value.trim());
-  const category = document.getElementById('taskCategory').value;
+  // Start ambient sound when user interacts
+  document.body.addEventListener("click", () => {
+    if (ambientSound.paused) {
+      ambientSound.play().catch(() => {}); // Suppress autoplay errors
+    }
+  }, { once: true });
 
-  if (name && time) {
-    const task = {
-      name,
-      time,
-      category,
-      createdAt: new Date().toLocaleString()
-    };
-    tasks.push(task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    renderTask(task);
-    updateTotalTime();
-    form.reset();
+  function updateTotalTime(time) {
+    totalTime += time;
+    totalTimeEl.textContent = totalTime;
   }
-});
 
-function renderTask(task) {
-  const li = document.createElement('li');
-  li.innerHTML = `
-    <div>
-      <strong>${task.name}</strong> – ${task.time} min
-      <div class="task-meta">${task.category} | ${task.createdAt}</div>
-    </div>
-    <button class="delete-btn">❌</button>
-  `;
+  function createSparks(x, y) {
+    for (let i = 0; i < 10; i++) {
+      const spark = document.createElement("div");
+      spark.className = "spark";
+      document.body.appendChild(spark);
 
-  li.querySelector('.delete-btn').addEventListener('click', () => {
-    li.remove();
-    tasks = tasks.filter(t => t.createdAt !== task.createdAt);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    updateTotalTime();
+      const size = Math.random() * 5 + 5;
+      spark.style.width = `${size}px`;
+      spark.style.height = `${size}px`;
+      spark.style.left = `${x}px`;
+      spark.style.top = `${y}px`;
+      spark.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+      setTimeout(() => spark.remove(), 1000);
+    }
+  }
+
+  taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = taskName.value.trim();
+    const time = parseInt(taskTime.value);
+    const category = taskCategory.value;
+
+    if (name === "" || isNaN(time) || time <= 0) return;
+
+    const li = document.createElement("li");
+    li.innerHTML = `<strong>${name}</strong> - ${time} min <span class="category">${category}</span>`;
+    li.classList.add("task-item");
+
+    taskList.appendChild(li);
+    updateTotalTime(time);
+
+    const rect = e.submitter.getBoundingClientRect();
+    createSparks(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+    // 🔊 Play sound
+    addSound.currentTime = 0;
+    addSound.play().catch(() => {});
+
+    taskForm.reset();
   });
 
-  taskList.appendChild(li);
-}
-
-function updateTotalTime() {
-  const total = tasks.reduce((acc, t) => acc + t.time, 0);
-  totalTimeEl.innerText = total;
-}
+  // Bubble animation
+  for (let i = 0; i < 15; i++) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    document.body.appendChild(bubble);
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDuration = `${10 + Math.random() * 10}s`;
+  }
+});

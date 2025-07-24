@@ -1,93 +1,138 @@
 body {
   margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(120deg, #74ebd5, #ACB6E5);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: linear-gradient(to top right, #0f0f0f, #1a1a1a);
+  color: #fff;
+  overflow-x: hidden;
 }
 
 .wrapper {
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 2rem;
-  width: 90%;
   max-width: 600px;
-  color: #333;
+  margin: 50px auto;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff inset;
+  border: 1px solid #0ff;
+  position: relative;
 }
 
-header {
+header h1 {
   text-align: center;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #0ff;
+  margin-bottom: 10px;
 }
 
 .total-time {
+  text-align: center;
+  margin-bottom: 20px;
   font-weight: bold;
-  margin-top: 0.5rem;
-  color: #222;
+  color: #fff;
 }
 
 .task-input form {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 10px;
 }
 
-.task-input input, .task-input select, .task-input button {
+.task-input input,
+.task-input select,
+.task-input button {
   padding: 10px;
-  border-radius: 8px;
+  font-size: 1rem;
+  border-radius: 10px;
   border: none;
   outline: none;
-  font-size: 1rem;
 }
 
-.task-input input, .task-input select {
-  flex: 1 1 40%;
+.task-input input,
+.task-input select {
+  flex: 1 1 30%;
 }
 
 .task-input button {
-  background: #4CAF50;
-  color: white;
+  background-color: #0ff;
+  color: #000;
   cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
 }
 
 .task-input button:hover {
-  background: #45a049;
+  background-color: #0cc;
+  transform: scale(1.05);
 }
 
 .task-list ul {
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
+  margin-top: 20px;
 }
 
 .task-list li {
-  background: rgba(255, 255, 255, 0.25);
+  padding: 12px;
   margin-bottom: 10px;
-  padding: 1rem;
-  border-left: 6px solid #4CAF50;
-  border-radius: 12px;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: rgba(0, 255, 255, 0.1);
+  border-left: 5px solid #0ff;
+  border-radius: 10px;
+  animation: fadeIn 0.4s ease-in;
 }
 
-.task-meta {
-  font-size: 0.9rem;
-  color: #555;
+.category {
+  float: right;
+  color: #0ff;
+  font-size: 0.9em;
+  font-style: italic;
 }
 
-.delete-btn {
-  background: transparent;
-  border: none;
-  color: red;
-  font-size: 1.2rem;
-  cursor: pointer;
+/* Sparkle effect */
+.spark {
+  position: fixed;
+  border-radius: 50%;
+  z-index: 999;
+  pointer-events: none;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+        calc(100px * (0.5 - Math.random())),
+        calc(100px * (0.5 - Math.random()))
+      )
+      scale(0);
+    opacity: 0;
+  }
+}
+
+/* Bubble background */
+.bubble {
+  position: fixed;
+  bottom: -50px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: floatUp infinite ease-in;
+  z-index: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.5);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
