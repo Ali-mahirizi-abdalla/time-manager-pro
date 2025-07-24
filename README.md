@@ -46,7 +46,7 @@ Publish directory: /
 Click Deploy Site
 
 🔗 Live Demo
-👉 https://time-manager-abdalla.netlify.app/
+👉 https://ali-mahirizi-abdalla.github.io/time-manager-pro/
 
 Click the link above to try it out live 🚀
 
